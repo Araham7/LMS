@@ -1,4 +1,5 @@
-# 1. `eslint-plugin-simple-import-sort` : we use `eslint-plugin-simple-import-sort` to `automatically sort the import statements` in our code. Its main purpose is to keep the code `clean`, `readable`, and `consistent`, making it easier for developers to manage imports and maintain a structured format across the project.
+# 1. `eslint-plugin-simple-import-sort` : 
+##  we use `eslint-plugin-simple-import-sort` to `automatically sort the import statements` in our code. Its main purpose is to keep the code `clean`, `readable`, and `consistent`, making it easier for developers to manage imports and maintain a structured format across the project.
 
 ### i. Intallation of `eslint-plugin-simple-import-sort`
 ```bash
@@ -90,7 +91,8 @@ and add this ` , "editor.codeActionsOnSave": { "source.fixAll.eslint": true } `
 }
 ```
 
-# 2. `react-hot-toast`
+# 2. `react-hot-toast`: 
+## `react-hot-toast` is a lightweight, customizable library for creating beautiful and accessible toast notifications in React applications. It's easy to integrate and provides a smooth user experience with animated notifications.
 
 ### i. Installation :
 ```bash
@@ -117,3 +119,26 @@ createRoot(document.getElementById('root')).render(
   </BrowserRouter>
 );
 ```
+
+# 3. creating `axiosInstance` : 
+## create a directory `./src/Helpers/axiosInstance.js`
+Add code :---
+```js
+import "dotenv/config"; // importing the `dotenv`(environment-variable-data).
+import axios from "axios"; // importing the `axios`.
+
+const BASE_URL = process.env.BASE_URL; // getting the `BASE_URL` from `dotenv`.
+
+const axiosInstance = axios.create(); // Creating an instance of axios.
+axiosInstance.defaults.baseURL = BASE_URL; // Setting the `BASE_URL` of axios.
+axiosInstance.defaults.withCredentials = true; // Enabling credentials.
+axiosInstance.defaults.timeout = 30000; // Setting timeout to 30 seconds (30000 ms).
+
+
+export default axiosInstance; // Exporting axios instance.
+```
+
+# 4. 
+
+
+
