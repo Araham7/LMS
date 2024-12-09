@@ -36,6 +36,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
+      "react/prop-types": "off", // removing "ESLint missing props validation" error.
     },
   },
 ]

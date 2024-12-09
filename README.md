@@ -138,7 +138,70 @@ axiosInstance.defaults.timeout = 30000; // Setting timeout to 30 seconds (30000 
 export default axiosInstance; // Exporting axios instance.
 ```
 
-# 4. 
+# 4. How to remove "eslint missing props validation" error ?
 
+##  To remove the "ESLint missing props validation" error , we use :---
 
+### i. Go to the `eslint.config.js` file and add `"react/prop-types": "off"` in `"rules":{  }` section :---
+```js
+import js from '@eslint/js'
+import globals from 'globals'
+import react from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import reactRefresh from 'eslint-plugin-react-refresh'
+import simpleImportSort from 'eslint-plugin-simple-import-sort' // Import simple-import-sort
 
+export default [
+  { ignores: ['dist'] },
+  {
+    files: ['**/*.{js,jsx}'],
+    languageOptions: {
+      ecmaVersion: 2020,
+      globals: globals.browser,
+      parserOptions: {
+        ecmaVersion: 'latest',
+        ecmaFeatures: { jsx: true },
+        sourceType: 'module',
+      },
+    },
+    settings: { react: { version: '18.3' } },
+    plugins: {
+      react,
+      'react-hooks': reactHooks,
+      'react-refresh': reactRefresh,
+      'simple-import-sort': simpleImportSort, // "simpleImportSort" in "plugins" section.
+    },
+    rules: {
+      ...js.configs.recommended.rules,
+      ...react.configs.recommended.rules,
+      ...react.configs['jsx-runtime'].rules,
+      ...reactHooks.configs.recommended.rules,
+      'simple-import-sort/imports': 'error', // Adding simple-import-sort rule.
+      'react/jsx-no-target-blank': 'off',
+      'react-refresh/only-export-components': [
+        'warn',
+        { allowConstantExport: true },
+      ],
+      "react/prop-types": "off", // To remove the "ESLint missing props validation" error.
+    },
+  },
+]
+```
+
+# 5. Enabling daisyUi by adding `require('@tailwindcss/line-clamp')` in `plugins` array of `tailwind.config.js` :---
+
+```js
+/** @type {import('tailwindcss').Config} */
+export default {
+  content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {},
+  },
+  plugins: [
+    require('daisyui'), require('@tailwindcss/line-clamptailwindcss/line-clamp') // Add the DaisyUI plugin here
+  ],
+}
+```

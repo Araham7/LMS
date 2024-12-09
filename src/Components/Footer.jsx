@@ -5,17 +5,17 @@ function Footer() {
   const year = currentDate.getFullYear();
 
   return (
-    <>
+    <div>
     {/* footer-section */}
-      <footer className='relative left-0 bottom-0 h-[15vh] py-1 flex flex-col sm:flex-row items-center justify-between text-white bg-gray-800 sm:px-20'>
+      <footer className='relative left-0 bottom-0 h-[10vh] w-full py-1 flex flex-col sm:flex-row items-center justify-between text-white bg-gray-800 sm:px-20'>
 
         {/* footer-text */}
-        <section className='text-lg text-red'>
+        <section className=' font-bold text-2xl  text-red'>
         &copy; {year} | All rights reserved
         </section>
 
         {/* Icons */}
-        <section className='flex items-center justify-center gap-5 text-2xl text-white  mb-2'>
+        <section className='flex items-center justify-center gap-5 text-2xl text-white'>
           <a href="https://www.facebook.com" className='hover:text-yellow-500 transition-all ease-in-out duration-300'>
             <BsFacebook /> {/* fb-icon */}
           </a>
@@ -39,7 +39,7 @@ function Footer() {
           </a>
         </section>
       </footer>
-    </>
+    </div>
   );
 }
 

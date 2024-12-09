@@ -1,6 +1,8 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Footer from "./Components/Footer";
+import HomePage from "./Pages/HomePage";
+import NotFound from "./Pages/NotFound";
+
 
 function App() {
   return (
@@ -8,7 +10,11 @@ function App() {
     <Routes>
 
       {/* <Route path="/" element={<Home/>} > </Route> */}
-      <Route path="/" element={<Footer />} />
+      <Route path="/" element={<HomePage />} />
+
+
+      {/* Handle 404 Not-Found Page */}
+      <Route path="*" element={<NotFound />} />
 
     </Routes>
     </>

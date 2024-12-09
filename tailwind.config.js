@@ -8,7 +8,7 @@ export default {
     extend: {},
   },
   plugins: [
-    require('daisyui'), // Add the DaisyUI plugin here
+    require('daisyui'),// Add the DaisyUI plugin here
   ],
 }
 
