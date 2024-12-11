@@ -188,10 +188,12 @@ export default [
 ]
 ```
 
-# 5. Enabling daisyUi by adding `require('@tailwindcss/line-clamp')` in `plugins` array of `tailwind.config.js` :---
+# 5. Enabling DaisyUI by Adding `daisyui` in the `plugins Array` of `tailwind.config.js` file :---
 
 ```js
 /** @type {import('tailwindcss').Config} */
+import daisyui from 'daisyui'; // Import this
+
 export default {
   content: [
     "./index.html",
@@ -201,7 +203,8 @@ export default {
     extend: {},
   },
   plugins: [
-    require('daisyui'), require('@tailwindcss/line-clamptailwindcss/line-clamp') // Add the DaisyUI plugin here
+    daisyui, // & Add the DaisyUI plugin here
   ],
-}
+};
+
 ```
