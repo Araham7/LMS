@@ -1,4 +1,4 @@
-import { BsFacebook, BsInstagram, BsWhatsapp, BsYoutube, BsGeoAlt, BsLinkedin, BsTwitter } from 'react-icons/bs';
+import { BsFacebook, BsGeoAlt, BsInstagram, BsLinkedin, BsTwitter,BsWhatsapp, BsYoutube } from 'react-icons/bs';
 
 function Footer() {
   const currentDate = new Date();

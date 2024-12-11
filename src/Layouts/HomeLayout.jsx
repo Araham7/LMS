@@ -3,6 +3,7 @@
 import { AiFillCloseCircle } from "react-icons/ai";
 import { TfiMenuAlt } from "react-icons/tfi";
 import { Link } from "react-router-dom";
+
 import Footer from "../Components/Footer.jsx";
 
 function HomeLayout({ children }) {

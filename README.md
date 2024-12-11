@@ -1,4 +1,4 @@
-# 1. `eslint-plugin-simple-import-sort` : 
+# 1. `eslint-plugin-simple-import-sort` : (Ek jayse import ko sajata hai bas.)
 ##  we use `eslint-plugin-simple-import-sort` to `automatically sort the import statements` in our code. Its main purpose is to keep the code `clean`, `readable`, and `consistent`, making it easier for developers to manage imports and maintain a structured format across the project.
 
 ### i. Intallation of `eslint-plugin-simple-import-sort`
@@ -8,9 +8,9 @@ npm i eslint-plugin-simple-import-sort
 
 ### ii. Add ```import simpleImportSort from 'eslint-plugin-simple-import-sort' // Import simple-import-sort``` in `eslint.config.js`(file's)
 
-### iii. Add `simple-import-sort` in `eslint.config.js`(file's) `plugins`(bobject) section.
+### iii. Add `simple-import-sort` in `eslint.config.js`(file's) `plugins`(Object) section.
 
-### iv. Add ``` 'simple-import-sort/imports': 'error', //Adding simple-import-sort rule ``` in `eslint.config.js`(file's) `rules`(bobject) section. 
+### iv. Add ``` 'simple-import-sort/imports': 'error', //Adding simple-import-sort rule ``` in `eslint.config.js`(file's) `rules`(Object) section. 
 
 ```js
 
@@ -58,9 +58,11 @@ export default [
 
 ```
 
-## v.(`To enable auto import sort on file save in vs-code(vs-codium)`) Configuring VS-code to fix all eslint-error on save :---
-(Go to settings>(surch `settings`) + enter on the `Edit in settings.json`)
-and add this ` , "editor.codeActionsOnSave": { "source.fixAll.eslint": true } `
+## v. install the extension `ESLint` , then `Restart` the vsCode editor.
+
+## vi. (`To enable auto import sort on file save in vs-code(vs-codium)`) Configuring VS-code to fix all eslint-error on save :---
+(Go to settings>(surch `settings`) then enter on the `Edit in settings.json`)
+and add this ` , "editor.codeActionsOnSave": { "source.fixAll.eslint": "always" } `
 ```js
 {
     "files.autoSave": "afterDelay",
@@ -86,7 +88,7 @@ and add this ` , "editor.codeActionsOnSave": { "source.fixAll.eslint": true } `
 
     ],
     "editor.codeActionsOnSave": { // Add this here.
-        "source.fixAll.eslint": true
+        "source.fixAll.eslint": "always"
     }
 }
 ```

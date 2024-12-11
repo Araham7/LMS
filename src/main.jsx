@@ -1,14 +1,14 @@
 // Css import
 import './index.css';
 
-// Component import
-import App from './App.jsx';
-
 // library import
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
+
+// Component import
+import App from './App.jsx';
 import store from './Redux/store.js';
 
 

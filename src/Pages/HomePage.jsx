@@ -1,12 +1,13 @@
-import React from "react";
-import HomeLayout from "../Layouts/HomeLayout";
 import { Link } from "react-router-dom";
+
 import HomePageImage from "../Assets/Images/homePageMainImage.png";
+import HomeLayout from "../Layouts/HomeLayout";
 
 function HomePage() {
   return (
     <HomeLayout>
-      <div className="pl-20 pt-20 flex flex-row text-white bg-slate-500 h-[90vh]">
+      {/* bg-slate-500  */}
+      <div className="pl-20 pt-20 flex flex-row text-white  h-[90vh]">
 
         {/* Main-Data */}
         <div className="w-2/3 space-y-6 px-5">
