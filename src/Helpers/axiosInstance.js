@@ -3,6 +3,8 @@ import "dotenv/config"; // importing the `dotenv`(environment-variable-data).
 import axios from "axios"; // importing the `axios`.
 
 const BASE_URL = process.env.BASE_URL; // getting the `BASE_URL` from `dotenv`.
+console.log(BASE_URL); // "BASE_URL" => This is server URL.
+
 
 const axiosInstance = axios.create(); // Creating an instance of axios.
 axiosInstance.defaults.baseURL = BASE_URL; // Setting the `BASE_URL` of axios.
