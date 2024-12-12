@@ -75,7 +75,7 @@ function HomeLayout({ children }) {
         {/* Menu-Contents */}
         <div className="drawer-side w-fit">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
-          <ul className="menu p-4 w-48 sm:w-80 bg-base-100 text-base-content relative font-extrabold text-[1rem] ">
+          <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-base-100 text-base-content relative font-extrabold text-[1rem] ">
             {/* Sidebar content here */}
 
             {/* Cancel Button */}
