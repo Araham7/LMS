@@ -20,16 +20,16 @@ function HomeLayout({ children }) {
   };
 
   return (
-    <div className="min-h-[90vh]">
+    <div data-theme="luxury" className="min-h-[90vh]  ">
       {/* (1). drawer */}
-      <div className="drawer absolute left-0 z-50 w-fit">
+      <div className="drawer absolute z-50 left-0 w-fit">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
         <div className="drawer-content">
           <label htmlFor="my-drawer" className="cursor-pointer relative">
             {/* Menu-Icon */}
             <TfiMenuAlt
               size={"30px"}
-              className="font-bold text-blue-800 m-4 "
+              className="font-bold text-white m-4 "
               onClick={() => changeWidth()}
             />
           </label>
@@ -39,48 +39,36 @@ function HomeLayout({ children }) {
         <div className="drawer-side w-fit">
           <label htmlFor="my-drawer" className="drawer-overlay"></label>
           <ul className="menu p-4 w-48 sm:w-80 bg-base-100 text-base-content relative font-extrabold text-[1rem] ">
-            {/* Sidebar content here */}
+
+                          {/* Sidebar content here */}
+
+            {/* Cancel Button */}
             <li className="w-fit absolute right-2 z-50">
               <button onClick={() => hideDrawer()} className="bg-transparent">
                 <AiFillCloseCircle size={"30px"} />
               </button>
             </li>
+
+            {/* Home */}
             <li>
               <Link to="/">Home</Link>
             </li>
+
+            {/* All Courses */}
             <li>
-              <Link to="/about">About Us</Link>
+              <Link to="/courses">All Courses</Link>
             </li>
-            <li>
-              <Link to="/programs">Programs Offered</Link>
-            </li>
-            <li>
-              <Link to="/schedule">Class Schedule</Link>
-            </li>
-            <li>
-              <Link to="/Instructors">Instructors</Link>
-            </li>
-            <li>
-              <Link to="/gallery">Gallery</Link>
-            </li>
-            <li>
-              <Link to="/enroll">Join Us / Enrollment</Link>
-            </li>
-            <li>
-              <Link to="/events">Events & Competitions</Link>
-            </li>
+
+            {/* Contact Us */}
             <li>
               <Link to="/contact">Contact Us</Link>
             </li>
+
+            {/* About Us */}
             <li>
-              <Link to="/shop">Shop / Merchandise</Link>
+              <Link to="/about">About Us</Link>
             </li>
-            <li>
-              <Link to="/testimonials">Testimonials & Achievements</Link>
-            </li>
-            <li>
-              <Link to="/faqs">FAQs</Link>
-            </li>
+
           </ul>
         </div>
       </div>

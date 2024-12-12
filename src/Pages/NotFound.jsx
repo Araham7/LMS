@@ -4,7 +4,7 @@ function NotFound() {
     const navigate = useNavigate();
     return (
         // bg-[#1A2238]
-        <div className="h-screen w-full flex flex-col justify-center items-center ">
+        <div data-theme="halloween" className="h-screen w-full flex flex-col justify-center items-center ">
 
             {/* (1). 404-text */}
             <h1 className="text-9xl font-extrabold text-white tracking-widest">

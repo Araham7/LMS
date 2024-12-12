@@ -1,22 +1,22 @@
 import { Link } from "react-router-dom";
 
 import HomePageImage from "../Assets/Images/homePageMainImage.png";
-import HomeLayout from "../Layouts/HomeLayout";
+import Layout from "../Layouts/Layout";
 
 function HomePage() {
   return (
-    <HomeLayout>
+    <Layout>
       {/* bg-slate-500  */}
-      <div className="pl-20 pt-20 flex flex-row text-white  h-[90vh]">
-
+      <div className="pl-20 pt-20 flex flex-row text-white  h-[90vh] ">
         {/* Main-Data */}
         <div className="w-2/3 space-y-6 px-5">
           <h1 className="text-5xl font-semibold">
-            Explore the Best
-            <span className="text-yellow-500 font-bold">Karate Offline Courses</span>
+            Find out best{" "}
+            <span className="text-yellow-500 font-bold">Online Courses</span>
           </h1>
           <p className="text-3xl text-gray-200 font-bold">
-          Our BMA academy offers a wide range of Karate courses, taught by highly skilled and qualified instructors, all at an affordable price.
+            We have a large library of courses taught by highly skilled and
+            qualified faculities at a very affordable cost.
           </p>
 
           <div className="space-x-6">
@@ -41,7 +41,7 @@ function HomePage() {
           <img alt="homepage image" src={HomePageImage} />
         </div>
       </div>
-    </HomeLayout>
+    </Layout>
   );
 }
 
