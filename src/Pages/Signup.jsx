@@ -157,6 +157,7 @@ function Signup() {
     <Layout>
       <div className="flex flex-col items-center justify-center h-[90vh]">
         <form
+          data-theme="night"
           noValidate
           onSubmit={createNewAccount}
           className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white w-96 shadow-[0_0_10px_black]"

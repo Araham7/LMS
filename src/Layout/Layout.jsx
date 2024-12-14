@@ -11,7 +11,7 @@ function Layout({ children }) {
   /*
   "useDispatch()" hook is explicitly used in React-Redux to modify store data by dispatching actions. These actions are then processed by reducers, which are responsible for updating the Redux store state based on the action's type and payload. 
   */
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const navigate = useNavigate();
 
   /*
