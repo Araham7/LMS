@@ -1,8 +1,10 @@
-import "dotenv/config"; // importing the `dotenv`(environment-variable-data).
+// import "dotenv/config"; // importing the `dotenv`(environment-variable-data).
 
 import axios from "axios"; // importing the `axios`.
 
-const BASE_URL = process.env.BASE_URL; // getting the `BASE_URL` from `dotenv`.
+// const BASE_URL = process.env.BASE_URL; // getting the `BASE_URL` from `dotenv`.
+const BASE_URL = "http://localhost:8523/api/v1";
+
 console.log(BASE_URL); // "BASE_URL" => This is server URL.
 
 
