@@ -7,7 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 
 import Footer from "../Components/Footer.jsx";
 
-function HomeLayout({ children }) {
+function Layout({ children }) {
   /*
   "useDispatch()" hook is explicitly used in React-Redux to modify store data by dispatching actions. These actions are then processed by reducers, which are responsible for updating the Redux store state based on the action's type and payload. 
   */
@@ -27,11 +27,11 @@ function HomeLayout({ children }) {
   // for data :--
   const data = useSelector((state) => state?.auth?.data);
 
-  console.log({
-    isLoggedIn,
-    role,
-    data,
-  });
+  // console.log({
+    // isLoggedIn,
+    // role,
+    // data,
+  // });
 
   const changeWidth = () => {
     const drawerSide = document.getElementsByClassName("drawer-side");
@@ -57,7 +57,8 @@ function HomeLayout({ children }) {
 
   // drawer-side
   return (
-    <div data-theme="luxury" className="min-h-[90vh]  ">
+    //  luxury
+    <div data-theme="dim" className="min-h-[90vh]  ">
       {/* (1). drawer */}
       <div className="drawer absolute z-50 left-0 w-fit">
         <input id="my-drawer" type="checkbox" className="drawer-toggle" />
@@ -175,4 +176,4 @@ function HomeLayout({ children }) {
   );
 }
 
-export default HomeLayout;
+export default Layout;
