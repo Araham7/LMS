@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import Denied from "./Pages/Denied";
 import HomePage from "./Pages/HomePage";
 import Login from "./Pages/Login";
 import NotFound from "./Pages/NotFound";
@@ -21,6 +22,7 @@ function App() {
       <Route path="/signup" element={<Signup />} ></Route>
       <Route path="/login" element={<Login />} ></Route>
       <Route path="/contact" element={<Contact />} ></Route>
+      <Route path="/denied" element={<Denied />} ></Route>
 
       {/* Handle 404 Not-Found Page */}
       <Route path="*" element={<NotFound />} />
