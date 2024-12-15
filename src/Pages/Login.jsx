@@ -108,10 +108,10 @@ function Signup() {
 
           {/* (iv). Signup-Link */}
           <p className="text-center font-extrabold">
-            Donot hanve an account ?{" "}
+            Don’t have an account?{" "}
             <Link to="/signup" className="link text-accent cursor-pointer font-extrabold ">
               {" "}
-              Signup
+              Sign Up
             </Link>
           </p>
 

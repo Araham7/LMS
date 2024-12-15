@@ -6,12 +6,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 import Footer from "../Components/Footer.jsx";
+import { logout } from "../Redux/Slices/AuthSlice.js";
 
 function Layout({ children }) {
   /*
   "useDispatch()" hook is explicitly used in React-Redux to modify store data by dispatching actions. These actions are then processed by reducers, which are responsible for updating the Redux store state based on the action's type and payload. 
   */
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   /*
@@ -25,8 +26,7 @@ function Layout({ children }) {
   const role = useSelector((state) => state?.auth?.role);
 
   // for data :--
-  const data = useSelector((state) => state?.auth?.data);
-
+  // const data = useSelector((state) => state?.auth?.data);
   // console.log({
     // isLoggedIn,
     // role,
@@ -45,13 +45,10 @@ function Layout({ children }) {
     changeWidth();
   };
 
-  const handleLogout = (e) => {
+  const handleLogout = async (e) => {
     e.preventDefault();
-
-    // const res = await dispatch(logout);
-
-    // if(res?.payload?.succes)
-      navigate("/");
+    const res = await dispatch(logout());
+    if(res?.payload?.succes) navigate("/");
   }
 
 
@@ -140,7 +137,6 @@ function Layout({ children }) {
 
           {/* profile and Logout Button */}
             {isLoggedIn && (
-                // bg-slate-400
             <li className="absolute bottom-4 w-[90%]">
                 <div className="w-full flex gap-10 items-center justify-center ">
                   <Link to="/user/profile">

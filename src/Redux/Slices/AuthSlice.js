@@ -11,6 +11,7 @@ const initialState = {
     data: localStorage.getItem('data') || {},
 }
 
+
 // Initial state ke baad me "AsyncThunk" banaya jata hai:---
 /*
 Importent Note : `createAsyncThunk` => Iska use humlog Redux store se kisi API ke particular route par "asynchronous request" karne keliye action likhne keliye karten hai.
@@ -21,11 +22,11 @@ export const createAccount = createAsyncThunk("/auth/signup", async (data) => { 
         "axiosInstance.post()" method ke 1st-argument me humlog wo "sub-route" denge janha par humlogon ko request bhejna hai. 
         */
         const res = axiosInstance.post("/users/register", data);
-        toast.promise(res, {
+        await toast.promise(res, {
             loading: "Wait! creating your account",
             success: (response) => {
                 console.log(response); /* Thie will print the response received by the user */
-                return data?.data?.message;
+                return response?.data?.message; /* Yanha par humlog backend se response me jo message aaraha hai use return kar rahen hai. */
             },
             error: "Failed to create account"
         });
@@ -45,13 +46,13 @@ export const login = createAsyncThunk("/auth/login", async (data) => { /* "creat
     request bhejna hai. 
             */
             const res = axiosInstance.post("/users/login", data);
-            toast.promise(res, {
+            await toast.promise(res, {
                 loading: "Wait! authentication in progress...",
                 success: (response) => {
                     console.log(response); /* Thie will print the response received by the user */
-                    return data?.data?.message;
+                    return response?.data?.message; /* Yanha par humlog backend se response me jo message aaraha hai use return kar rahen hai. */
                 },
-                error: "Failed to login"
+                error: "Failed to login!"
             });
             return (await res).data;
         } catch(error) {
@@ -59,14 +60,34 @@ export const login = createAsyncThunk("/auth/login", async (data) => { /* "creat
         }
     })
 
-    
+
+export const logout = createAsyncThunk("auth/logout", async ()=> {
+    try {
+        const res = axiosInstance.post("users/logout");
+        await toast.promise(res, {
+            loading: "Wait! logout in progress...",
+            success: (response) => {
+                console.log(response);
+                return response?.data?.message; /* Yanha par humlog backend se response me jo message aaraha hai use return kar rahen hai. */
+            },
+            error: "Failed to logOut!"
+        });
+        return (await res).data;
+    } catch(error) {
+        toast.error(error?.response?.data?.message);
+    }
+
+} )
+
+
 // authSlice ke reducer ko extend kiya jata hai :---
 const authSlice = createSlice({
     name: 'auth',
     initialState,
     reducers: {},
     extraReducers: (builder)  => {
-        builder.addCase(login.fulfilled, (state , action)=>{
+        builder
+        .addCase(login.fulfilled, (state , action)=>{
             localStorage.setItem("data", JSON.stringify(action?.payload?.user));
             localStorage.setItem("isLoggedIn" , true);
             localStorage.setItem("role", action?.payload?.user?.role);
@@ -77,6 +98,12 @@ const authSlice = createSlice({
             state.isLoggedIn = true;
             state.data = action?.payload?.user;
             state.role = action?.payload?.user?.role;
+        })
+        .addCase(logout.fulfilled, (state)=> {
+            localStorage.clear();
+            state.data = {};
+            state.isLoggedIn = false;
+            state.role = "";
         })
     }
 })
