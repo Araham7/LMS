@@ -36,7 +36,7 @@ function Contact() {
     }
 
     try {
-        const response = axiosInstance.post("/contact", userInput);
+        const response = axiosInstance.post("/users/contact", userInput);
         toast.promise(response, {
             loading: "Submitting your message...",
             success: "Form submitted successfully!",
@@ -52,7 +52,9 @@ function Contact() {
             });
         }
     } catch (err) {
-        toast.error("operation failed....")
+        toast.error("operation failed....",);
+        console.log(err.message);
+        
     }
 
 }
