@@ -4,6 +4,7 @@ import { Route, Routes } from "react-router-dom";
 
 import About from "./Pages/About";
 import Contact from "./Pages/Contact";
+import CourseDescription from './Pages/Course/CourseDescription';
 import CourseList from "./Pages/Course/CourseList";
 import Denied from "./Pages/Denied";
 import HomePage from "./Pages/HomePage";
@@ -24,8 +25,8 @@ function App() {
       <Route path="/login" element={<Login />} ></Route>
       <Route path="/contact" element={<Contact />} ></Route>
       <Route path="/denied" element={<Denied />} ></Route>
-
       <Route path="/courses" element={<CourseList />} ></Route>
+      <Route path="course/description/" element={<CourseDescription />} ></Route>
 
       {/* Handle 404 Not-Found Page */}
       <Route path="*" element={<NotFound />} />
