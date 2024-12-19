@@ -37,6 +37,7 @@ export default [
         { allowConstantExport: true },
       ],
       "react/prop-types": "off", // removing "ESLint missing props validation" error.
+      "no-console": "off"
     },
   },
 ]
