@@ -6,7 +6,8 @@ import toast from "react-hot-toast";
 import axiosInstance from '../../Helpers/axiosInstance';
 
 const initialState = {
-    isLoggedIn: localStorage.getItem('isLggedIn') || false, /* localStorage.getItem('isLggedIn') : Ye Browser ke local-storage se "isLggedIn" data ko nikal lega. */
+    isLoggedIn: localStorage.getItem('isLoggedIn') || false, /* localStorage.getItem('isLoggedIn') : Ye Browser ke local-storage se "isLggedIn" data ko nikal lega. */
+
     role: localStorage.getItem('role') || '',
     data: localStorage.getItem('data') || {},
 }
@@ -89,7 +90,7 @@ const authSlice = createSlice({
         builder
         .addCase(login.fulfilled, (state , action)=>{
             localStorage.setItem("data", JSON.stringify(action?.payload?.user));
-            localStorage.setItem("isLoggedIn" , true);
+            localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem("role", action?.payload?.user?.role);
 
             /* 

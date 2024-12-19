@@ -1,11 +1,20 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
+import { useSelector } from "react-redux";
+import { useNavigate } from 'react-router-dom';
 
 import axiosInstance from "../Helpers/axiosInstance";
 import { isEmail } from '../Helpers/regexMatcher';
 import Layout from "../Layout/Layout";
 
 function Contact() {
+
+  const navigate = useNavigate();
+
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  // console.log(isLoggedIn);
+  
+
   const [userInput, setUserInput] = useState({
     name: "",
     email: "",
@@ -25,7 +34,7 @@ function Contact() {
   async function onFormSubmit(e) {
     e.preventDefault();
 
-    if(!userInput.email || !userInput.name || !userInput.message) {
+    if(!userInput.email || !userInput.name || !userInput.message ) {
         toast.error("All fields are mandatory!");
         return;
     }
@@ -33,6 +42,12 @@ function Contact() {
     if(!isEmail(userInput.email)) {
         toast.error("Invalid email");
         return;
+    }
+
+    if(!isLoggedIn){
+      toast.error("Please Login to Submit the form.");
+      navigate('/login'); // Redirects to /login
+      return;
     }
 
     try {
