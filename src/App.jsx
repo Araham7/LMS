@@ -7,7 +7,7 @@ import About from "./Pages/About";
 import Contact from "./Pages/Contact";
 import CourseDescription from "./Pages/Course/CourseDescription";
 import CourseList from "./Pages/Course/CourseList";
-import CreateCourse from "./Pages/CreateCourse";
+import CreateCourse from "./Pages/Course/CreateCourse";
 import Denied from "./Pages/Denied";
 import HomePage from "./Pages/HomePage";
 import Login from "./Pages/Login";
@@ -34,7 +34,6 @@ function App() {
           <Route path="/courses/create" element={<CreateCourse />}></Route>
         </Route>
 
-        <Route path="/courses/create" element={<CreateCourse />}></Route>
 
         {/* Handle 404 Not-Found Page */}
         <Route path="*" element={<NotFound />} />

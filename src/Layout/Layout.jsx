@@ -76,7 +76,7 @@ function Layout({ children }) {
           <ul className="menu p-4 w-48 h-[100%] sm:w-80 bg-base-100 text-base-content relative font-extrabold text-[1rem] ">
             {/* Sidebar content here */}
 
-            {/* Cancel Button */}
+            {/* Cancel(X) Button */}
             <li className="w-fit absolute right-2 z-50">
               <button onClick={() => hideDrawer()} className="bg-transparent">
                 <AiFillCloseCircle size={"30px"} />
@@ -89,10 +89,20 @@ function Layout({ children }) {
             </li>
 
             {/* Conditional Rendering based no user login-detailes */}
+                          {/* Admin DashBoard */}
             {isLoggedIn && role === "ADMIN" && (
               <>
                 <li>
                   <Link to="/admin/dashboard">Admin DashBoard</Link>
+                </li>
+              </>
+            )}
+
+                    {/* Create new course */}
+            {isLoggedIn && role === "ADMIN" && (
+              <>
+                <li>
+                  <Link to="/courses/create">Create new course</Link>
                 </li>
               </>
             )}
