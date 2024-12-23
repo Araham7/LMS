@@ -5,10 +5,10 @@ function RequireAuth( { allowedRoles } ) {
   console.log(`allowedRoles => ${JSON.stringify(allowedRoles)}`);
 
     const { isLoggedIn , role } = useSelector((state)=> state.auth);
-    console.log({
-       isLoggedIn,
-       role
-    });
+    // console.log({
+      //  isLoggedIn,
+      //  role
+    // });
     
 
   return (

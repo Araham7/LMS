@@ -13,6 +13,9 @@ import HomePage from "./Pages/HomePage";
 import Login from "./Pages/Login";
 import NotFound from "./Pages/NotFound";
 import Signup from "./Pages/Signup";
+import ChangePassword from "./Pages/User/ChangePassword";
+import EditProfile from "./Pages/User/EditProfile";
+import Profile from "./Pages/User/Profile";
 
 function App() {
   return (
@@ -27,13 +30,21 @@ function App() {
         <Route path="/contact" element={<Contact />}></Route>
         <Route path="/denied" element={<Denied />}></Route>
         <Route path="/courses" element={<CourseList />}></Route>
-        <Route path="course/description/" element={<CourseDescription />} ></Route>
+        <Route
+          path="course/description/"
+          element={<CourseDescription />}
+        ></Route>
 
         {/* RequireAuth */}
-        <Route element={<RequireAuth allowedRoles={["ADMIN"]} />} >
+        <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
           <Route path="/courses/create" element={<CreateCourse />}></Route>
         </Route>
 
+        <Route element={<RequireAuth allowedRoles={["ADMIN" , "USER"]} />}>
+          <Route path="/user/profile" element={<Profile />}></Route>
+          <Route path="/user/editprofile" element={<EditProfile />}></Route>
+          <Route path="/user/changepassword" element={<ChangePassword />}></Route>
+        </Route>
 
         {/* Handle 404 Not-Found Page */}
         <Route path="*" element={<NotFound />} />

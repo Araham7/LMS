@@ -26,6 +26,8 @@ export const getAllCourses = createAsyncThunk("/course/get", async () => {
     }
 }); 
 
+
+
 // "createNewCourse" : function to create newCourse.
 export const createNewCourse = createAsyncThunk("/course/create", async (data) => {
     try {
