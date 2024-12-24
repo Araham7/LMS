@@ -6,7 +6,7 @@ import axiosInstance from "../../Helpers/axiosInstance";
 /* Initial state */
 const initialState = {
   key: "",
-  subscriptionId: "",
+  subscription_id: "",
   isPaymentVerified: false,
   allPayments: {},
   finalMonths: {},
@@ -31,7 +31,9 @@ export const purchaseCourseBundle = createAsyncThunk(
       const response = await axiosInstance.post("/payments/subscribe");
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Failed to purchase bundle!");
+      toast.error(
+        error?.response?.data?.message || "Failed to purchase bundle!"
+      );
     }
   }
 );
@@ -47,7 +49,9 @@ export const verifyUserPayment = createAsyncThunk(
       });
       return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Payment verification failed!");
+      toast.error(
+        error?.response?.data?.message || "Payment verification failed!"
+      );
     }
   }
 );
@@ -59,7 +63,8 @@ export const getPaymentRecords = createAsyncThunk(
       const response = await axiosInstance.get("/payments/count=100");
       toast.promise(response, {
         loading: "Fetching payment records...",
-        success: (data) => data?.data?.message || "Records fetched successfully!",
+        success: (data) =>
+          data?.data?.message || "Records fetched successfully!",
       });
       return (await response).data;
     } catch (error) {
@@ -68,22 +73,67 @@ export const getPaymentRecords = createAsyncThunk(
   }
 );
 
+// /*
 export const cancelCourseBundle = createAsyncThunk(
   "razorpay/cancelBundle",
   async () => {
     try {
-      const response = await axiosInstance.post("/payments/unsubscribe");
-      toast.promise(response, {
+      const responsePromise = axiosInstance.post("/payments/unsubscribe");
+
+      // Using toast.promise to handle promise states
+      await toast.promise(responsePromise, {
         loading: "Unsubscribing the bundle...",
-        success: (data) => data?.data?.message || "Unsubscribed successfully!",
-        error: "Failed to unsubscribe!",
+        success: (response) =>
+          response?.data?.message || "Unsubscribed successfully!",
+        error: (error) =>
+          error?.response?.data?.message || "Failed to unsubscribe!",
       });
-      return (await response).data;
+
+      const response = await responsePromise;
+      return response.data;
     } catch (error) {
-      toast.error(error?.response?.data?.message || "Unsubscription failed!");
+      const errorMessage =
+        error?.response?.data?.message || "Unsubscription failed!";
+      toast.error(errorMessage);
+
+      // Explicitly returning null to indicate failure
+      return null;
     }
   }
 );
+
+// *
+
+/*
+export const cancelCourseBundle = createAsyncThunk(
+  "razorpay/cancelBundle",
+  async () => {
+    try {
+      const responsePromise = axiosInstance.post("/payments/unsubscribe");
+
+      // Toast.promise ke andar responsePromise directly handle karte hain
+      await toast.promise(responsePromise,
+        {
+          loading: "Unsubscribing the bundle...",
+          success: (response) =>
+            response?.data?.message || "Unsubscribed successfully!",
+          error: (error) => error?.response?.data?.message || "Failed to unsubscribe!",
+        }
+      );
+
+      const response = await responsePromise;
+      return response.data;
+    } catch (error) {
+      const errorMessage =
+        error?.response?.data?.message || "Unsubscription failed!";
+      toast.error(errorMessage);
+
+      // Returning null or undefined explicitly to indicate failure
+      return null;
+    }
+  }
+);
+*/
 
 /* Slice definition */
 const razorpaySlice = createSlice({
@@ -96,7 +146,7 @@ const razorpaySlice = createSlice({
         state.key = action.payload?.key;
       })
       .addCase(purchaseCourseBundle.fulfilled, (state, action) => {
-        state.subscriptionId = action.payload?.subscription_id;
+        state.subscription_id = action.payload?.subscription_id;
       })
       .addCase(verifyUserPayment.fulfilled, (state, action) => {
         toast.success(action.payload?.message || "Payment verified!");

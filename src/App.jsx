@@ -12,10 +12,13 @@ import Denied from "./Pages/Denied";
 import HomePage from "./Pages/HomePage";
 import Login from "./Pages/Login";
 import NotFound from "./Pages/NotFound";
+import Checkout from "./Pages/Payments/Checkout";
 import Signup from "./Pages/Signup";
 import ChangePassword from "./Pages/User/ChangePassword";
 import EditProfile from "./Pages/User/EditProfile";
 import Profile from "./Pages/User/Profile";
+import CheckoutSuccess from './Pages/Payments/CheckoutSuccess';
+import CheckoutFailure from "./Pages/Payments/CheckoutFailure";
 
 function App() {
   return (
@@ -44,6 +47,9 @@ function App() {
           <Route path="/user/profile" element={<Profile />}></Route>
           <Route path="/user/editprofile" element={<EditProfile />}></Route>
           <Route path="/user/changepassword" element={<ChangePassword />}></Route>
+          <Route path="/checkout" element={<Checkout />}></Route>
+          <Route path="/checkout/success" element={<CheckoutSuccess />}></Route>
+          <Route path="/checkout/fail" element={<CheckoutFailure />}></Route>
         </Route>
 
         {/* Handle 404 Not-Found Page */}
