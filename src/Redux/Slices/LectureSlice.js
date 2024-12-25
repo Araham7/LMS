@@ -7,8 +7,9 @@ const initialState = {
   lectures: [],
 };
 
-
-export const getCourseLectures = createAsyncThunk("/course/lecture/get", async (courseId) => {
+export const getCourseLectures = createAsyncThunk(
+  "/course/lecture/get",
+  async (courseId) => {
     try {
       const response = axiosInstance.get(`/courses/${courseId}`);
       toast.promise(response, {
@@ -22,7 +23,6 @@ export const getCourseLectures = createAsyncThunk("/course/lecture/get", async (
     }
   }
 );
-
 
 export const addCourseLecture = createAsyncThunk("/course/lecture/add", async (data) => {
     try {
@@ -44,36 +44,40 @@ export const addCourseLecture = createAsyncThunk("/course/lecture/add", async (d
   }
 );
 
-
-export const deleteCourseLecture = createAsyncThunk("/course/lecture/delete", async (data) => {
+export const deleteCourseLecture = createAsyncThunk(
+  "/course/lecture/delete",
+  async (data) => {
     try {
-        const response = axiosInstance.delete(`/courses?courseId=${data.courseId}&lectureId=${data.lectureId}`);
-        toast.promise(response, {
-            loading: "deleting course lecture",
-            success: "Lecture deleted successfully",
-            error: "Failed to delete the lectures"
-        });
-        return (await response).data;
-    } catch(error) {
-        toast.error(error?.response?.data?.message);
+      const response = axiosInstance.delete(
+        `/courses?courseId=${data.courseId}&lectureId=${data.lectureId}`
+      );
+      toast.promise(response, {
+        loading: "deleting course lecture",
+        success: "Lecture deleted successfully",
+        error: "Failed to delete the lectures",
+      });
+      return (await response).data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
     }
-});
-
+  }
+);
 
 const lectureSlice = createSlice({
   name: "lecture",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getCourseLectures.fulfilled, (state, action) => {
+    builder
+      .addCase(getCourseLectures.fulfilled, (state, action) => {
         console.log(action);
         state.lectures = action?.payload?.lectures;
-    })
-    .addCase(addCourseLecture.fulfilled, (state, action) => {
+      })
+      .addCase(addCourseLecture.fulfilled, (state, action) => {
         console.log(action);
         state.lectures = action?.payload?.course?.lectures;
-    })
-}
+      });
+  },
 });
 
 export default lectureSlice.reducer;
