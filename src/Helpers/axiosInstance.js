@@ -3,9 +3,10 @@
 import axios from "axios"; // importing the `axios`.
 
 // const BASE_URL = process.env.BASE_URL; // getting the `BASE_URL` from `dotenv`.
-const BASE_URL = "http://localhost:8523/api/v1";
+// const BASE_URL = "http://localhost:8523/api/v1"; /* https://my-lms-backend-server.onrender.com */
 
-console.log(BASE_URL); // "BASE_URL" => This is server URL.
+
+// console.log(BASE_URL); // "BASE_URL" => This is server URL.
 
 
 const axiosInstance = axios.create(); // Creating an instance of axios.
