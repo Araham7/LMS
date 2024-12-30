@@ -47,7 +47,7 @@ function Displaylectures() {
                             muted
                             controlsList="nodownload"
                         >
-                        </video>    
+                        </video>
                         <div>
                             <h1>
                                 <span className="text-yellow-500 font-bold text-3xl"> Title: {" "}

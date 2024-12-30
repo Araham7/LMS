@@ -7,6 +7,7 @@ const initialState = {
   lectures: [],
 };
 
+/* (1). get-all-CourseLectures */
 export const getCourseLectures = createAsyncThunk(
   "/course/lecture/get",
   async (courseId) => {
@@ -24,6 +25,7 @@ export const getCourseLectures = createAsyncThunk(
   }
 );
 
+/* (2). add-one-Lecture-in-the-course */
 export const addCourseLecture = createAsyncThunk("/course/lecture/add", async (data) => {
     try {
       const formData = new FormData();
@@ -44,13 +46,10 @@ export const addCourseLecture = createAsyncThunk("/course/lecture/add", async (d
   }
 );
 
-export const deleteCourseLecture = createAsyncThunk(
-  "/course/lecture/delete",
-  async (data) => {
+/* (3). delete-one-lecture-in-the-course */
+export const deleteCourseLecture = createAsyncThunk("/course/lecture/delete", async (data) => {
     try {
-      const response = axiosInstance.delete(
-        `/courses?courseId=${data.courseId}&lectureId=${data.lectureId}`
-      );
+      const response = axiosInstance.delete(`/courses?courseId=${data.courseId}&lectureId=${data.lectureId}`);
       toast.promise(response, {
         loading: "deleting course lecture",
         success: "Lecture deleted successfully",

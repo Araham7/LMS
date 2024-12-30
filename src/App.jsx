@@ -32,13 +32,9 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
-        <Route path="/contact" element={<Contact />}></Route>
         <Route path="/denied" element={<Denied />}></Route>
-        <Route path="/courses" element={<CourseList />}></Route>
-        <Route
-          path="course/description/"
-          element={<CourseDescription />}
-        ></Route>
+        
+        
 
         {/* RequireAuth: Routes for "ADMIN" only. */}
         <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
@@ -56,6 +52,9 @@ function App() {
           <Route path="/checkout/success" element={<CheckoutSuccess />}></Route>
           <Route path="/checkout/fail" element={<CheckoutFailure />}></Route>
           <Route path="/course/displaylectures" element={<Displaylectures />}></Route>
+          <Route path="/contact" element={<Contact />}></Route>
+          <Route path="/courses" element={<CourseList />}></Route>
+          <Route  path="course/description/" element={<CourseDescription />}></Route>
         </Route>
 
 

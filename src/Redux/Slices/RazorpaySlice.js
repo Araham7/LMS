@@ -24,9 +24,8 @@ export const getRazorpayKey = createAsyncThunk("razorpay/getKey", async () => {
   }
 });
 
-export const purchaseCourseBundle = createAsyncThunk(
-  "razorpay/purchaseCourse",
-  async () => {
+/* Buy-Subscription */
+export const purchaseCourseBundle = createAsyncThunk("razorpay/purchaseCourse",  async () => {
     try {
       const response = await axiosInstance.post("/payments/subscribe");
       return response.data;
@@ -38,9 +37,8 @@ export const purchaseCourseBundle = createAsyncThunk(
   }
 );
 
-export const verifyUserPayment = createAsyncThunk(
-  "razorpay/verifyPayment",
-  async (data) => {
+/* Verify-Subscription */
+export const verifyUserPayment = createAsyncThunk("razorpay/verifyPayment",  async (data) => {
     try {
       const response = await axiosInstance.post("/payments/verify", {
         razorpay_payment_id: data.razorpay_payment_id,
@@ -56,9 +54,8 @@ export const verifyUserPayment = createAsyncThunk(
   }
 );
 
-export const getPaymentRecords = createAsyncThunk(
-  "razorpay/getRecords",
-  async () => {
+/* Get All Payment Records */
+export const getPaymentRecords = createAsyncThunk("razorpay/getRecords", async () => {
     try {
       const response = await axiosInstance.get("/payments/count=100");
       toast.promise(response, {
@@ -73,67 +70,30 @@ export const getPaymentRecords = createAsyncThunk(
   }
 );
 
-// /*
-export const cancelCourseBundle = createAsyncThunk(
-  "razorpay/cancelBundle",
-  async () => {
+/* Cancle Subscription */
+export const cancelCourseBundle = createAsyncThunk("razorpay/cancelBundle", async () => {
     try {
-      const responsePromise = axiosInstance.post("/payments/unsubscribe");
-
-      // Using toast.promise to handle promise states
-      await toast.promise(responsePromise, {
-        loading: "Unsubscribing the bundle...",
-        success: (response) =>
-          response?.data?.message || "Unsubscribed successfully!",
-        error: (error) =>
-          error?.response?.data?.message || "Failed to unsubscribe!",
-      });
-
-      const response = await responsePromise;
-      return response.data;
-    } catch (error) {
-      const errorMessage =
-        error?.response?.data?.message || "Unsubscription failed!";
-      toast.error(errorMessage);
-
-      // Explicitly returning null to indicate failure
-      return null;
-    }
-  }
-);
-
-// *
-
-/*
-export const cancelCourseBundle = createAsyncThunk(
-  "razorpay/cancelBundle",
-  async () => {
-    try {
-      const responsePromise = axiosInstance.post("/payments/unsubscribe");
-
-      // Toast.promise ke andar responsePromise directly handle karte hain
-      await toast.promise(responsePromise,
+      const response = await toast.promise(
+        axiosInstance.post("/payments/unsubscribe"),
         {
           loading: "Unsubscribing the bundle...",
           success: (response) =>
             response?.data?.message || "Unsubscribed successfully!",
-          error: (error) => error?.response?.data?.message || "Failed to unsubscribe!",
+          error: (error) =>
+            error?.response?.data?.message || "Failed to unsubscribe!",
         }
       );
 
-      const response = await responsePromise;
-      return response.data;
+      return response.data; // No need for second await
     } catch (error) {
       const errorMessage =
         error?.response?.data?.message || "Unsubscription failed!";
       toast.error(errorMessage);
-
-      // Returning null or undefined explicitly to indicate failure
-      return null;
+      return null; // Explicit failure return
     }
   }
 );
-*/
+
 
 /* Slice definition */
 const razorpaySlice = createSlice({
