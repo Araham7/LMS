@@ -21,6 +21,7 @@ import Signup from "./Pages/Signup";
 import ChangePassword from "./Pages/User/ChangePassword";
 import EditProfile from "./Pages/User/EditProfile";
 import Profile from "./Pages/User/Profile";
+import AdminDashboard from "./Pages/Dashboard/AdminDashboard";
 
 function App() {
   return (
@@ -29,22 +30,22 @@ function App() {
         
       {/* Common routes for every person. */}
         <Route path="/" element={<HomePage />} />
-        <Route path="/about" element={<About />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/denied" element={<Denied />}></Route>
         
         
-
         {/* RequireAuth: Routes for "ADMIN" only. */}
         <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
           <Route path="/courses/create" element={<CreateCourse />}></Route>
           <Route path="/course/addlecture" element={<AddLecture />}></Route>
+          <Route path="/admin/dashboard" element={<AdminDashboard />}></Route>
         </Route>
 
 
         {/* RequireAuth: Routes for "ADMIN" & "USER" only. */}
         <Route element={<RequireAuth allowedRoles={["ADMIN" , "USER"]} />}>
+          <Route path="/about" element={<About />}></Route>
           <Route path="/user/profile" element={<Profile />}></Route>
           <Route path="/user/editprofile" element={<EditProfile />}></Route>
           <Route path="/user/changepassword" element={<ChangePassword />}></Route>

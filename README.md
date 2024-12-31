@@ -210,3 +210,9 @@ export default {
 };
 
 ```
+
+# 6. To use "chart.js" :
+```bash
+npm i react-chartjs-2 chart.js # This will install "chart.js" and "react-chartjs-2".
+```
+

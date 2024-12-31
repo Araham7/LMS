@@ -3,14 +3,14 @@ import toast from "react-hot-toast";
 
 import axiosInstance from "../../Helpers/axiosInstance";
 
-// Initial state with course data
+// Initial state with course data:
 const initialState = {
     courseData: [],
     loading: false,
     error: null,
 };
 
-// Async thunk to fetch all courses
+// Async thunk to fetch(get)-all-courses:
 export const getAllCourses = createAsyncThunk("/course/get", async () => {
     try {
         const response = axiosInstance.get("/courses");
@@ -26,9 +26,24 @@ export const getAllCourses = createAsyncThunk("/course/get", async () => {
     }
 }); 
 
+// Async thunk to delete-all-courses:
+export const deleteCourse = createAsyncThunk("/course/delete", async (id) => {
+    try {
+        const response = axiosInstance.delete(`/courses/${id}`);
+        toast.promise(response, {
+            loading: "deleting course ...",
+            success: "Courses deleted successfully",
+            error: "Failed to delete the courses",
+        });
+
+        return (await response).data;
+    } catch(error) {
+        toast.error(error?.response?.data?.message);
+    }
+}); 
 
 
-// "createNewCourse" : function to create newCourse.
+// "createNewCourse" : function to create newCourse:
 export const createNewCourse = createAsyncThunk("/course/create", async (data) => {
     try {
         let formData = new FormData();
@@ -55,7 +70,7 @@ export const createNewCourse = createAsyncThunk("/course/create", async (data) =
     }
 });
 
-// Create slice with reducers and extraReducers
+// Create slice with reducers and extraReducers:
 const courseSlice = createSlice({
     name: "courses",
     initialState,

@@ -13,6 +13,7 @@ const initialState = {
   monthlySalesRecord: [],
 };
 
+
 /* Async actions */
 export const getRazorpayKey = createAsyncThunk("razorpay/getKey", async () => {
   try {
@@ -24,74 +25,85 @@ export const getRazorpayKey = createAsyncThunk("razorpay/getKey", async () => {
   }
 });
 
+
 /* Buy-Subscription */
-export const purchaseCourseBundle = createAsyncThunk("razorpay/purchaseCourse",  async () => {
-    try {
-      const response = await axiosInstance.post("/payments/subscribe");
-      return response.data;
-    } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "Failed to purchase bundle!"
-      );
-    }
+export const purchaseCourseBundle = createAsyncThunk("razorpay/purchaseCourse", async () => {
+  try {
+    const response = await axiosInstance.post("/payments/subscribe");
+    return response.data;
+  } catch (error) {
+    toast.error(
+      error?.response?.data?.message || "Failed to purchase bundle!"
+    );
   }
+}
 );
+
 
 /* Verify-Subscription */
-export const verifyUserPayment = createAsyncThunk("razorpay/verifyPayment",  async (data) => {
-    try {
-      const response = await axiosInstance.post("/payments/verify", {
-        razorpay_payment_id: data.razorpay_payment_id,
-        razorpay_subscription_id: data.razorpay_subscription_id,
-        razorpay_signature: data.razorpay_signature,
-      });
-      return response.data;
-    } catch (error) {
-      toast.error(
-        error?.response?.data?.message || "Payment verification failed!"
-      );
-    }
+export const verifyUserPayment = createAsyncThunk("razorpay/verifyPayment", async (data) => {
+  try {
+    const response = await axiosInstance.post("/payments/verify", {
+      razorpay_payment_id: data.razorpay_payment_id,
+      razorpay_subscription_id: data.razorpay_subscription_id,
+      razorpay_signature: data.razorpay_signature,
+    });
+    return response.data;
+  } catch (error) {
+    toast.error(
+      error?.response?.data?.message || "Payment verification failed!"
+    );
   }
+}
 );
 
+
 /* Get All Payment Records */
-export const getPaymentRecords = createAsyncThunk("razorpay/getRecords", async () => {
-    try {
-      const response = await axiosInstance.get("/payments/count=100");
-      toast.promise(response, {
-        loading: "Fetching payment records...",
-        success: (data) =>
-          data?.data?.message || "Records fetched successfully!",
-      });
-      return (await response).data;
-    } catch (error) {
-      toast.error("Failed to fetch payment records!");
-    }
+export const getPaymentRecords = createAsyncThunk("/payments/record", async () => {
+  try {
+    const responsePromise = axiosInstance.get("/payments?count=100");
+
+    // Use toast.promise with the promise object directly
+    toast.promise(responsePromise, {
+      loading: "Fetching payment records...",
+      success: (data) => {
+        return data?.data?.message || "Records fetched successfully!";
+      },
+      error: "Failed to get payment records",
+    });
+
+    // Wait for the response and return the actual data
+    const response = await responsePromise;
+    return response.data;
+  } catch (error) {
+    toast.error("Failed to fetch payment records!");
+    throw error; // Ensure the error propagates for proper handling in the thunk
   }
-);
+});
+
 
 /* Cancle Subscription */
 export const cancelCourseBundle = createAsyncThunk("razorpay/cancelBundle", async () => {
-    try {
-      const response = await toast.promise(
-        axiosInstance.post("/payments/unsubscribe"),
-        {
-          loading: "Unsubscribing the bundle...",
-          success: (response) =>
-            response?.data?.message || "Unsubscribed successfully!",
-          error: (error) =>
-            error?.response?.data?.message || "Failed to unsubscribe!",
-        }
-      );
+  try {
+    const response = await toast.promise(
+      axiosInstance.post("/payments/unsubscribe"),
+      {
+        loading: "Unsubscribing the bundle...",
+        success: (response) =>
+          response?.data?.message || "Unsubscribed successfully!",
+        error: (error) =>
+          error?.response?.data?.message || "Failed to unsubscribe!",
+      }
+    );
 
-      return response.data; // No need for second await
-    } catch (error) {
-      const errorMessage =
-        error?.response?.data?.message || "Unsubscription failed!";
-      toast.error(errorMessage);
-      return null; // Explicit failure return
-    }
+    return response.data; // No need for second await
+  } catch (error) {
+    const errorMessage =
+      error?.response?.data?.message || "Unsubscription failed!";
+    toast.error(errorMessage);
+    return null; // Explicit failure return
   }
+}
 );
 
 
@@ -117,11 +129,23 @@ const razorpaySlice = createSlice({
         state.isPaymentVerified = false;
       })
       .addCase(getPaymentRecords.fulfilled, (state, action) => {
-        toast.success(action.payload?.message || "Payment records fetched!");
-        state.allPayments = action.payload?.allPayments;
-        state.finalMonths = action.payload?.finalMonths;
-        state.monthlySalesRecord = action.payload?.monthlySalesRecord;
+        const message = action.payload?.message || "Payment records fetched!";
+        toast.success(message);
+      
+        console.log(`getPaymentRecords fulfilled:`, action.payload);
+      
+        // Uncomment and validate these updates
+        state.allPayments = action.payload?.allPayments || [];
+        state.finalMonths = action.payload?.finalMonths || [];
+        state.monthlySalesRecord = action.payload?.monthlySalesRecord || [];
       });
+      // .addCase(getPaymentRecords.fulfilled, (state, action) => {
+      //   toast.success(action.payload?.message || "Payment records fetched!");
+      //   console.log(`getPaymentRecords: ${action.payload}`);
+      //   // state.allPayments = action.payload?.allPayments;
+      //   // state.finalMonths = action.payload?.finalMonths;
+      //   // state.monthlySalesRecord = action.payload?.monthlySalesRecord;
+      // });
   },
 });
 
