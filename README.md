@@ -216,3 +216,111 @@ export default {
 npm i react-chartjs-2 chart.js # This will install "chart.js" and "react-chartjs-2".
 ```
 
+# 7. How to host react-website using `gh-pages`(i.e, using `Github Pages`) :---
+
+## 1. Install `gh-pages` Package :
+```bash
+npm install gh-pages --save-dev
+```
+
+## 2. Update `package.json` file :
+### Add a homepage field in your package.json. Replace `<git-username>` with your GitHub username and `<git-repository-name>` with your git repository name:
+```js
+"homepage": "https://<git-username>.github.io/<git-repository-name>"
+```
+### Then, update the `scripts` section(of `package.json` file) to include deployment commands:
+```js
+"scripts": {
+  "predeploy": "vite build",
+  "deploy": "gh-pages -d dist"
+}
+```
+#### Finally we have to add below code in `package.json` file:
+```js
+"homepage": "https://<git-username>.github.io/<git-repository-name>",
+"scripts": {
+  "dev": "vite",
+  "build": "vite build",
+  "lint": "eslint .",
+  "preview": "vite preview",
+  "predeploy": "vite build",
+  "deploy": "gh-pages -d dist"
+}
+```
+
+## 3. Configure Vite:
+
+Modify your `vite.config.js` or `vite.config.ts` file to specify the `base` option. The `base` option should match your repository name:
+
+```js
+base: '/<git-repository-name>',
+```
+
+### Finally your `vite.cofig.js` file look like this :---
+```js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+
+export default defineConfig({
+  plugins: [react()],
+  base: '/<git-repository-name>', // Replace '<git-repository-name>' with your repository name.
+});
+```
+
+## 4. Fix React Router (If Used):
+If you're using React Router, update your `BrowserRouter` to use a `basename` that matches your `base` path:
+```js
+import { BrowserRouter } from 'react-router-dom';
+
+const App = () => (
+  <BrowserRouter basename="/<git-repository-name>">
+    {/* Your Routes Here */}
+  </BrowserRouter>
+);
+
+export default App;
+```
+
+## 5. Why Add a `404.html`?
+GitHub Pages serves the 404.html file whenever a route isn't directly found. This is essential for Single Page Applications (SPA), like React apps, because React handles routing on the client side.(To overcome this problem we always use)
+
+## 6. Create a `404.html` File:
+Inside the `public` directory(folder) of your project, create a file named `404.html` . This ensures it gets copied into the `dist` folder during the build process.
+
+### Add the following code to the `404.html` file:
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 Not Found</title>
+  </head>
+  <body>
+    <script>
+      // Redirect all 404 requests to the index.html
+      window.location.href = '/<git-repository-name>/' + location.pathname + location.search + location.hash;
+    </script>
+  </body>
+</html>
+```
+> Note: Replace /<git-repository-name>/ with the `base` path of your application as configured in `vite.config.js`.
+
+## 7. `Build` the application:
+`npm run build` command ko run karne se project ke production-ready files generate hote hain. Ye files optimize ki jaati hain aur ready hoti hain deploy karne ke liye.
+```bash
+npm run build
+```
+
+## 8. Deploy to `GitHub Pages`:
+`npm run deploy` command project ko deploy karne ke liye use hota hai.Ye hosting platform par files upload karta hai, jaise GitHub Pages, Vercel, ya Netlify.
+
+```bash
+npm run deploy
+```
+
+## 9. Test Locally:
+Run the application locally using the `preview` script to ensure it works as expected:
+```bash
+npm run preview # This command run the build file locally.
+```

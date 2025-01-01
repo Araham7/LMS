@@ -15,7 +15,7 @@ import store from './Redux/store.js';
 createRoot(document.getElementById('root')).render(
   // 
   <Provider store={store} > {/* Activating Redux Store in an Entire Application. */}
-  <BrowserRouter> {/* Activating BrowserRouter in an Entire Application. */}
+  <BrowserRouter basename="/LMS" > {/* Activating BrowserRouter in an Entire Application. */}
     <App />
     <Toaster />  {/* This way we can enable the `react-hot-toast` throughout the entire app */}
   </BrowserRouter>
