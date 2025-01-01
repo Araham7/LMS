@@ -25,12 +25,10 @@
   </head>
   <body>
     <script>
-      // Make sure the path redirects correctly within /LMS base.
+      // Ensure the path only redirects once and works within the /LMS base
       const redirectPath = '/LMS';
       const currentPath = location.pathname.replace(redirectPath, '');
-      
-      // Redirecting to the main app if a 404 occurs, keeping the query and hash intact.
-      window.location.href = `${redirectPath}${currentPath}${location.search}${location.hash}`;
-    </script>
+      window.location.href = `${redirectPath}#${currentPath}${location.search}${location.hash}`;
+    </script>    
   </body>
 </html>
