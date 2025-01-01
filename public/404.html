@@ -6,9 +6,31 @@
     <title>404 Not Found</title>
   </head>
   <body>
+    
     <script>
-      // Redirect all 404 requests to the index.html
-      window.location.href = '/LMS/' + location.pathname + location.search + location.hash;
+      // Ensure the path only redirects once
+      const redirectPath = '/LMS';
+      const currentPath = location.pathname.replace(redirectPath, '');
+      window.location.href = `${redirectPath}${currentPath}${location.search}${location.hash}`;
     </script>
   </body>
 </html>
+
+<!-- 
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>404 Not Found</title>
+  </head>
+  <body>
+    <script>
+      // Ensure the path only redirects once and works within the /LMS base
+      const redirectPath = '/LMS';
+      const currentPath = location.pathname.replace(redirectPath, '');
+      window.location.href = `${redirectPath}#${currentPath}${location.search}${location.hash}`;
+    </script>    
+  </body>
+</html>
+ -->
